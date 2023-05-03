@@ -72,19 +72,19 @@ async def check_test(call:CallbackQuery,state:FSMContext):
     title=answer_data['title']
     testlar='\n '.join(answer)
     photo=answer_data['photo']
-    ids=tests_count()+1
+    
     if photo is None:
         if check=="yes":
-            await call.message.edit_text(f"#id{ids}\n{title} \n{testlar}\n\nTest qabul qilindi")
-            test_add(title, photo, answer, str(datetime.today()))
+            ids=test_add(title, photo, answer, str(datetime.today()))
+            await call.message.edit_text(f"#id{ids}\n{title} \n{testlar}\n\nTest qabul qilindi") 
         else:
-            await call.message.edit_text(f"#id{ids}\n{title} \n{testlar}\n\nTest bekor qilindi")
+            await call.message.edit_text(f"{title} \n{testlar}\n\nTest bekor qilindi")
     else:
         if check=="yes":
+            ids=test_add(title, photo, answer, str(datetime.today()))
             await call.message.edit_caption(f"#id{ids}\n{title} \n{testlar}\n\nTest qabul qilindi")
-            test_add(title, photo, answer, str(datetime.today()))
         else:
-            await call.message.edit_caption(f"#id{ids}\n{title} \n{testlar}\n\nTest bekor qilindi")    
+            await call.message.edit_caption(f"{title} \n{testlar}\n\nTest bekor qilindi")    
 
     await state.finish()
     await call.message.answer("Kerakli tugmani tanlang",reply_markup=home_kb)
