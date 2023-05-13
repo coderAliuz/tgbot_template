@@ -17,3 +17,19 @@ def delete_inline_kb(ids):
         row_width=1
     )
     return delete_kb
+
+
+def answer_kb(uuid,i=0):
+    kb=InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton("A",callback_data=f"answer_{uuid}_{i}_0"),
+            InlineKeyboardButton("B",callback_data=f"answer_{uuid}_{i}_1")
+        ],
+        [
+            InlineKeyboardButton("C",callback_data=f"answer_{uuid}_{i}_2"),
+            InlineKeyboardButton("D",callback_data=f"answer_{uuid}_{i}_3")
+        ]
+    ],
+    row_width=2)
+    return kb
